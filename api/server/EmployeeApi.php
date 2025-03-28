@@ -11,5 +11,12 @@ class EmployeeApi {
 
     }
 
+    public function employeeDataSave($data) {
+
+        $model = new EmployeeModel();
+        return $model->updateEmployee($data);
+        
+    }
+
 
 }

@@ -14,21 +14,28 @@ document.addEventListener('DOMContentLoaded',
 
                 loadData(employee_id).then(
                     function(employee_data) {
-                        console.log(employee_data);
+                        console.log("Employee Data:", employee_data);
                         FormFiller.apply(employee_data);
+                        document.getElementById('id').value = employee_id;
                     }
                 )
         
-                form.addEventListener('submit',
-                    function( e ) {
-        
+                form.addEventListener('submit', 
+                    async function(e) {
                         e.preventDefault();
-        
+                    
                         let api = new EmployeeApi();
-        
-        
-                        alert('Saving not yet implemented (Hint: you should implement it)');
-                        return false;
+                    
+                        const formData = new FormData(form);
+                        const data = Object.fromEntries(formData.entries());
+                    
+                        const saveResult = await api.saveData(data);
+                        
+                        if (saveResult.success) {
+                            alert('Saved!');
+                        } else {
+                            alert('Error: ' + saveResult.msg);
+                        }
                     }
                 );
             }
@@ -36,10 +43,8 @@ document.addEventListener('DOMContentLoaded',
     }
 );
 
-const loadData = function( id ) {
-
-    let api = new EmployeeApi();
-    //return api.getData(id);
-    return fetch(`/api.php?obj=employee&req=get&id=${id}`);
+const loadData = function(id) {
+    return fetch(`/api.php?obj=employee&req=get&id=${id}`)
+    .then(res => res.json()); 
 }
 
