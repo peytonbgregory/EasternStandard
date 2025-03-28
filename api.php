@@ -15,7 +15,15 @@ switch( $req_obj ) {
     case 'employee':
         $auth->requireLogin();
         $api = new EmployeeApi();
-        $data = $api->employeeDataGet( $_GET['id'] ) ;
+    
+        if ($req_type == 'get') {
+            $data = $api->employeeDataGet($_GET['id']);
+        } else if ($req_type == 'save') {
+            $json = json_decode(file_get_contents("php://input"), true);
+            $data = $api->employeeDataSave($json);
+        }
+    
+        break;
     case 'auth':
         if ( $req_type == 'doLogin' ) {
             $data = $auth->doLogin( $_REQUEST['username'], $_REQUEST['password'] );

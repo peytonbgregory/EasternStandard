@@ -78,4 +78,18 @@ class EmployeeApi {
         
 
     }
+
+    saveData(data) {
+        return fetch(`api.php?obj=employee&req=save`, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.text()) // <== log raw text first
+          .then(text => {
+              // console.log("RAW RESPONSE:", text);
+              return JSON.parse(text); // attempt to parse after logging
+          });
+    }
 }

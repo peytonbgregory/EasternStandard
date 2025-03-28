@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded',
 const loadData = function( id ) {
 
     let api = new EmployeeApi();
-    return api.getData(id);
-    
+    //return api.getData(id);
+    return fetch(`/api.php?obj=employee&req=get&id=${id}`);
 }
 
