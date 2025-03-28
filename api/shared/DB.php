@@ -8,7 +8,11 @@ class DB {
     public static function connect() {
 
         if ( !self::$Connection) {
-            self::$Connection = new PDO('mysql:host=localhost;dbname=' . self::$DB_name, 'sqluser', 'sqlpass');
+            // Default Credentials
+            // self::$Connection = new PDO('mysql:host=localhost;dbname=' . self::$DB_name, 'sqluser', 'sqlpass');
+            
+            // MAMP Credentials
+            self::$Connection = new PDO('mysql:host=localhost;dbname=' . self::$DB_name, 'root', 'root'); 
         }
 
         return self::$Connection;
