@@ -50,7 +50,8 @@ class Auth {
         return [
             'success' => true,
             'id' => $user->id,
-            'role' => $user->role
+            'role' => $user->role,
+            'username' => $user->username
         ];
     }
     

@@ -28,7 +28,9 @@ div.instructions {
 
 .logout-container {
     text-align: right;
-    margin: 1em 0.5em;
+    padding: 0.5em 0.5em;
+    background-color: #eeeeee;
+    border-radius: 0.25em;
 }
 
 #logout_link {

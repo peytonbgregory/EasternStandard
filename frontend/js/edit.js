@@ -39,6 +39,11 @@ document.addEventListener('DOMContentLoaded',
                         }
                     }
                 );
+
+                const userLabel = document.getElementById('user_role_label');
+                if (userLabel) {
+                    userLabel.textContent = `Logged in as: ${auth_data.username} (${auth_data.role}) `;
+                }
                 
                 const logoutLink = document.getElementById('logout_link');
                 if (logoutLink) {
