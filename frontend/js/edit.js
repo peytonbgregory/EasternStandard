@@ -38,6 +38,21 @@ document.addEventListener('DOMContentLoaded',
                         }
                     }
                 );
+                
+                const logoutLink = document.getElementById('logout_link');
+                if (logoutLink) {
+                    logoutLink.addEventListener('click', function (e) {
+                        e.preventDefault();
+
+                        api.logout().then(function (result) {
+                            if (result.success) {
+                                window.location.href = 'login.html';
+                            } else {
+                                alert('Logout failed.');
+                            }
+                        });
+                    });
+                }
             }
         );
     }
@@ -47,4 +62,3 @@ const loadData = function(id) {
     return fetch(`/api.php?obj=employee&req=get&id=${id}`)
     .then(res => res.json()); 
 }
-

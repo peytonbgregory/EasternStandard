@@ -92,4 +92,9 @@ class EmployeeApi {
               return JSON.parse(text); // attempt to parse after logging
           });
     }
+
+    logout() {
+        return fetch(`/api.php?obj=auth&req=logout`)
+            .then(res => res.json());
+    }
 }

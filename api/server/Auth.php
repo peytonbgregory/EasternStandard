@@ -33,14 +33,23 @@ class Auth {
     }
 
     public function requireLogin() {
-
         session_start();
-        if ( empty($_SESSION['user_id']) ) {
+        if (empty($_SESSION['user_id'])) {
             header("HTTP/1.1 403 Access Denied");
             exit;
         }
+    
+        $user_id = $_SESSION['user_id'];
 
-        return [ 'success' => true, 'id' => $_SESSION['user_id'] ];
+        $model = new UserModel();
+        $user = $model->getById($user_id);
+    
+        return [
+            'success' => true,
+            'id' => $user->id,
+            'role' => $user->role
+        ];
     }
+    
 
 }

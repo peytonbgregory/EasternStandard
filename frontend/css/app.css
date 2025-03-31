@@ -25,3 +25,21 @@ div.instructions {
     padding: 10px;
     display: none;
 }
+
+.logout-container {
+    text-align: right;
+    margin: 1em 0.5em;
+}
+
+#logout_link {
+    text-decoration: none;
+    color: #fff;
+    background-color: black;
+    border-radius: 0.25em;
+    font-weight: bold;
+    padding:0.25em 0.5em;
+}
+
+#logout_link:hover {
+    text-decoration: underline;
+}
