@@ -33,6 +33,7 @@ class Auth {
     }
 
     public function requireLogin() {
+        // PHP doesn’t allow session_start() to run more than once
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
