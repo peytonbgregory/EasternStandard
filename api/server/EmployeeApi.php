@@ -15,8 +15,12 @@ class EmployeeApi {
 
         $model = new EmployeeModel();
         return $model->updateEmployee($data);
-        
+
     }
 
+    public function employeeListGet() {
+        $model = new EmployeeModel();
+        return $model->getAll();
+    }
 
 }

@@ -21,6 +21,9 @@ switch( $req_obj ) {
         } else if ($req_type == 'save') {
             $json = json_decode(file_get_contents("php://input"), true);
             $data = $api->employeeDataSave($json);
+        } else if ($req_type == 'list') {
+            $auth->requireLogin();
+            $data = $api->employeeListGet();
         }
     
         break;

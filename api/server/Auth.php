@@ -33,7 +33,9 @@ class Auth {
     }
 
     public function requireLogin() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         if (empty($_SESSION['user_id'])) {
             header("HTTP/1.1 403 Access Denied");
             exit;
