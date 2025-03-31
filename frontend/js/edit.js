@@ -32,11 +32,17 @@ document.addEventListener('DOMContentLoaded',
                     
                         const saveResult = await api.saveData(data);
                         
+                        const statusBox = document.getElementById('form_status');
+
                         if (saveResult.success) {
-                            alert('Saved!');
+                            statusBox.className = 'form-status success';
+                            statusBox.textContent = 'Employee record saved.';
                         } else {
-                            alert('Error: ' + saveResult.msg);
+                            statusBox.className = 'form-status error';
+                            statusBox.textContent = saveResult.msg || 'Failed to save record.';
                         }
+
+                        statusBox.style.display = 'block';
                     }
                 );
 
@@ -60,7 +66,6 @@ document.addEventListener('DOMContentLoaded',
                     });
                 }
                 if (user_role === 'admin') {
-                    console.log("User is admin!");
                 
                     const adminControls = document.getElementById('admin_controls');
                     const employeeSelect = document.getElementById('employee_select');
@@ -75,7 +80,7 @@ document.addEventListener('DOMContentLoaded',
                             employeeList.forEach(emp => {
                                 const option = document.createElement('option');
                                 option.value = emp.id;
-                                option.textContent = `${emp.last_name}, ${emp.first_name}`;
+                                option.textContent = `${emp.first_name} ${emp.last_name} (${emp.role})`;
                                 employeeSelect.appendChild(option);
                             });
                         });
@@ -83,6 +88,10 @@ document.addEventListener('DOMContentLoaded',
                     // Listen for selection change
                     employeeSelect.addEventListener('change', function () {
                         const selectedId = this.value;
+
+                        const statusBox = document.getElementById('form_status');
+                        statusBox.style.display = 'none';
+
                 
                         if (selectedId) {
                             loadData(selectedId).then(function (employee_data) {

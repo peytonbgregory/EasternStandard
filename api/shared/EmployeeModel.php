@@ -53,7 +53,7 @@ class EmployeeModel {
     public function getAll() {
         $conn = DB::connect();
     
-        $stmt = $conn->prepare("SELECT id, first_name, last_name FROM employees ORDER BY last_name");
+        $stmt = $conn->prepare("SELECT id, first_name, last_name, role FROM employees ORDER BY last_name");
         $stmt->execute();
     
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
