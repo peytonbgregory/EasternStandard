@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create New Employee</title>
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/form_filler.js"></script>
+    <script type="text/javascript" src="js/edit.js"></script>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <div class="logout-container">
+        <span id="user_role_label"></span>
+        <a href="#" id="logout_link">Logout</a>
+    </div>
+
+    <div class="instructions">Create a New Employee Account</div>
+
+    <div id="form_status" class="form-status" style="display: none;"></div>
+
+    <form id="create_employee_form">
+        <div>
+            <label for="first_name">First Name</label>
+            <input id="first_name" name="first_name" type="text" required>
+        </div>
+
+        <div>
+            <label for="last_name">Last Name</label>
+            <input id="last_name" name="last_name" type="text" required>
+        </div>
+
+        <div>
+            <label for="dob">Date of Birth</label>
+            <input id="dob" name="dob" type="date">
+        </div>
+
+        <div>
+            <label for="phone">Phone Number</label>
+            <input id="phone" name="phone" type="text">
+        </div>
+
+        <div>
+            <label for="office_number">Office Number</label>
+            <input id="office_number" name="office_number" type="text">
+        </div>
+
+        <div>
+            <label for="category">Employee Category</label>
+            <select id="category" name="category" required>
+                <option value="">-- Select a category --</option>
+                <option value="Full Time">Full Time</option>
+                <option value="Part Time">Part Time</option>
+                <option value="Contractor">Contractor</option>
+                <option value="Intern">Intern</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" required>
+        </div>
+
+        <div>
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" required>
+        </div>
+
+        <div>
+            <label for="role">Role</label>
+            <select id="role" name="role">
+            <option value="employee">Employee</option>
+            <option value="admin">Admin</option>
+            </select>
+        </div>
+
+        <div>
+            <input type="submit" value="Create User">
+        </div>
+    </form>
+    <hr />
+    <div class="admin-controls">
+        <button type="button" id="edit_btn">Edit Employee(s)</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const editButton = document.getElementById('edit_btn');
+            if (editButton) {
+                editButton.addEventListener('click', function () {
+                    window.location.href = 'employee_edit.html';
+                });
+            }
+        });
+
+        document.getElementById('create_employee_form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/api.php?obj=employee&req=create_full', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            const statusBox = document.getElementById('form_status');
+
+            if (result.success) {
+            statusBox.className = 'form-status success';
+            statusBox.textContent = 'Employee created successfully!';
+            } else {
+            statusBox.className = 'form-status error';
+            statusBox.textContent = result.msg || 'Error creating employee.';
+            }
+
+            statusBox.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>

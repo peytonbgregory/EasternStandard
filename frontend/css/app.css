@@ -66,3 +66,12 @@ div.instructions {
     border: 1px solid #f5c6cb;
 }
 
+.admin-controls button {
+    margin-top: 1em;
+    padding: 0.5em;
+    font-weight: bold;
+}
+
+hr {
+    margin:1em 0;
+}

@@ -11,7 +11,28 @@ document.addEventListener('DOMContentLoaded',
                 let employee_id = auth_data.id;
                 let user_role = auth_data.role;
 
+                const userLabel = document.getElementById('user_role_label');
+                if (userLabel) {
+                    userLabel.textContent = `Logged in as: ${auth_data.username} (${auth_data.role}) `;
+                }
+                
+                const logoutLink = document.getElementById('logout_link');
+                if (logoutLink) {
+                    logoutLink.addEventListener('click', function (e) {
+                        e.preventDefault();
+
+                        api.logout().then(function (result) {
+                            if (result.success) {
+                                window.location.href = 'login.html';
+                            } else {
+                                alert('Logout failed.');
+                            }
+                        });
+                    });
+                }
+
                 const form = document.getElementById('employee_record');
+                if (!form) return; // Exit if not on the edit form page
 
                 loadData(employee_id).then(
                     function(employee_data) {
@@ -46,32 +67,17 @@ document.addEventListener('DOMContentLoaded',
                     }
                 );
 
-                const userLabel = document.getElementById('user_role_label');
-                if (userLabel) {
-                    userLabel.textContent = `Logged in as: ${auth_data.username} (${auth_data.role}) `;
-                }
                 
-                const logoutLink = document.getElementById('logout_link');
-                if (logoutLink) {
-                    logoutLink.addEventListener('click', function (e) {
-                        e.preventDefault();
-
-                        api.logout().then(function (result) {
-                            if (result.success) {
-                                window.location.href = 'login.html';
-                            } else {
-                                alert('Logout failed.');
-                            }
-                        });
-                    });
-                }
                 if (user_role === 'admin') {
                 
                     const adminControls = document.getElementById('admin_controls');
                     const employeeSelect = document.getElementById('employee_select');
+                    const addEmployeeButton = document.getElementById('add_employee_controls');
+                    
                 
                     // Show the dropdown
                     adminControls.style.display = 'block';
+                    addEmployeeButton.style.display = 'block';
                 
                     // Load employee list
                     fetch('/api.php?obj=employee&req=list')
@@ -84,7 +90,11 @@ document.addEventListener('DOMContentLoaded',
                                 employeeSelect.appendChild(option);
                             });
                         });
-                
+
+                    addEmployeeButton.addEventListener('click', function () {
+                        window.location.href = 'create_user.html';
+                    });
+                    
                     // Listen for selection change
                     employeeSelect.addEventListener('change', function () {
                         const selectedId = this.value;

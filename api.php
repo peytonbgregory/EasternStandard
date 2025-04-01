@@ -22,11 +22,13 @@ switch( $req_obj ) {
             $json = json_decode(file_get_contents("php://input"), true);
             $data = $api->employeeDataSave($json);
         } else if ($req_type == 'list') {
-            $auth->requireLogin();
             $data = $api->employeeListGet();
+        } else if ($req_type == 'create_full') {
+            $data = $api->createFullEmployee();
         }
     
         break;
+        
     case 'auth':
         if ( $req_type == 'doLogin' ) {
             $data = $auth->doLogin( $_REQUEST['username'], $_REQUEST['password'] );
