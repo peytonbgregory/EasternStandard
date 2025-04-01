@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
+    <div class="wrapper">
     <div class="logout-container">
         <span id="user_role_label"></span>
         <a href="#" id="logout_link">Logout</a>
@@ -80,46 +81,47 @@
     <div class="admin-controls">
         <button type="button" id="edit_btn">Edit Employee(s)</button>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const editButton = document.getElementById('edit_btn');
-            if (editButton) {
-                editButton.addEventListener('click', function () {
-                    window.location.href = 'employee_edit.html';
-                });
-            }
-        });
-
-        document.getElementById('create_employee_form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const form = e.target;
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-
-            const response = await fetch('/api.php?obj=employee&req=create_full', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const editButton = document.getElementById('edit_btn');
+        if (editButton) {
+            editButton.addEventListener('click', function () {
+                window.location.href = 'employee_edit.html';
             });
+        }
+    });
 
-            const result = await response.json();
-            const statusBox = document.getElementById('form_status');
+    document.getElementById('create_employee_form').addEventListener('submit', async function(e) {
+        e.preventDefault();
 
-            if (result.success) {
-            statusBox.className = 'form-status success';
-            statusBox.textContent = 'Employee created successfully!';
-            } else {
-            statusBox.className = 'form-status error';
-            statusBox.textContent = result.msg || 'Error creating employee.';
-            }
+        const form = e.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
 
-            statusBox.style.display = 'block';
+        const response = await fetch('/api.php?obj=employee&req=create_full', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
         });
-    </script>
 
+        const result = await response.json();
+        const statusBox = document.getElementById('form_status');
+
+        if (result.success) {
+        statusBox.className = 'form-status success';
+        statusBox.textContent = 'Employee created successfully!';
+        } else {
+        statusBox.className = 'form-status error';
+        statusBox.textContent = result.msg || 'Error creating employee.';
+        }
+
+        statusBox.style.display = 'block';
+    });
+</script>
 </body>
 </html>
