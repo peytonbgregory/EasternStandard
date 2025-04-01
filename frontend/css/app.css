@@ -16,7 +16,8 @@ form input[type="text"] {
 }
 
 div.instructions {
-    padding: 10px;
+    padding: 1em 0;
+    font-weight:bold;
 }
 
 #login_msg {
@@ -47,8 +48,8 @@ div.instructions {
 }
 
 .form-status {
-    margin-bottom: 15px;
-    padding: 10px;
+    margin-bottom: 1em;
+    padding: 0.25em;
     border-radius: 4px;
     font-weight: bold;
 }
@@ -61,7 +62,7 @@ div.instructions {
 
 .form-status.error {
     background-color: #f8d7da;
-    color: #721c24;
+    color: red;
     border: 1px solid #f5c6cb;
 }
 

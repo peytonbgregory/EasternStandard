@@ -99,7 +99,25 @@ document.addEventListener('DOMContentLoaded',
                                 document.getElementById('id').value = selectedId;
                             });
                         }
+
+                        const formInstructions = document.getElementById('form_instructions');
+
+                        if (selectedId) {
+                            loadData(selectedId).then(function (employee_data) {
+                                FormFiller.apply(employee_data);
+                                document.getElementById('id').value = selectedId;
+
+                                // Change instructions text depending on who is being edited
+                                if (parseInt(selectedId) === auth_data.id) {
+                                    formInstructions.textContent = 'Enter your employee information below';
+                                } else {
+                                    formInstructions.textContent = `Editing ${employee_data.first_name} ${employee_data.last_name}'s employee profile`;
+                                }
+                            });
+                        }
+
                     });
+                    
                 }
                 
             }
