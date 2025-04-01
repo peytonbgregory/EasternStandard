@@ -1,56 +1,76 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Linux (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: es_challenge
--- ------------------------------------------------------
--- Server version	8.0.21-0ubuntu0.20.04.4
+-- Host: localhost:8889
+-- Generation Time: Apr 01, 2025 at 06:24 PM
+-- Server version: 8.0.40
+-- PHP Version: 8.3.14
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `es_challenge`
+--
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `employees`
 --
 
-DROP TABLE IF EXISTS `employees`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `employees` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(200) DEFAULT NULL,
-  `last_name` varchar(200) DEFAULT NULL,
-  `phone` varchar(30) DEFAULT NULL,
-  `office_number` varchar(20) DEFAULT NULL,
-  `username` varchar(10) DEFAULT NULL,
-  `password` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id` int NOT NULL,
+  `first_name` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `phone` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `office_number` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `username` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'employee'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `employees`
 --
 
-LOCK TABLES `employees` WRITE;
-/*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-INSERT INTO `employees` VALUES (1,'Joe','Smith','(215)245-2552','520','joe','$2y$10$l3d7LVRZSXFy2N8rs6y9C.fD9tk5dIAwjQtK.WQWjmVZCw5IAvati');
-/*!40000 ALTER TABLE `employees` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+INSERT INTO `employees` (`id`, `first_name`, `last_name`, `dob`, `phone`, `office_number`, `category`, `username`, `password`, `role`) VALUES
+(1, 'Joe', 'Smith', '2025-03-04', '555555556', '520', 'full time', 'joe', '$2y$10$FbrtdUmeNOUKBpnI0eUs0exrmT6yXT5nGpB.jOgVwZtbP07tcORWe', 'employee'),
+(2, 'Tim', 'Cook', '1990-01-01', '555-9999', '100', 'full time', 'admin', '$2y$10$kvzeRow6eL2dnZL2Lq6rkufYyget5t4o4kCJjJlGFGr087v5TtCei', 'admin'),
+(3, 'Dave', 'Davidson', '1985-01-01', '333-3333', '345', 'part time', 'dave', '$2y$10$jY7s8vjYFxgb6DfGLL09puX18e8Ga2J4A6.3GeBsuVTHkF96Ruxeu', 'employee'),
+(4, 'Cate', 'Gregory', '1985-01-20', '2345678888', '405', 'full time', 'cate', '$2y$10$spSbb3jzqyrdG.x/pUTTP.1jcoz2WlndgeYkO5OTwMh7t9VFht7By', 'employee');
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `employees`
+--
+ALTER TABLE `employees`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `employees`
+--
+ALTER TABLE `employees`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2020-08-23 23:06:42
