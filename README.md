@@ -75,8 +75,6 @@ Make sure MAMP is running (Apache and MySQL), then open: http://localhost:8888/
 - Admin User/Pass: admin/admin
 - Employee User/Pass: joe/password
 
-
-
 ## Requirments
 ### Employees can login and edit:
 
@@ -120,11 +118,7 @@ If the project is to grow into a full system:
 - Use Vue/React for frontend state management. Instead of manually updating the DOM with JavaScript (like document.getElementById(...)), Vue or React let you build the UI using reusable components and automatically update when data changes — which helps a lot when the app gets more complex.
 - Expand employee functionality (timesheets, documents)
 - Centralize roles/permissions. Right now you only have “admin” and “employee.” Later, you might want managers, HR, or IT — each with their own permissions. Having a central place to define and check permissions makes this easier and safer.
-
-
-- Write API test coverage and CI integration. Testing helps ensure that future changes don’t break anything. CI automates those checks.
-
-
+- Write API test coverage and CI integration. Testing helps ensure that future changes don’t break anything.
 
 ## Author
 Built by Peyton Gregory for the Eastern Standard Developer Challenge 2025.
