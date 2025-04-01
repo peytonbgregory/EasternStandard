@@ -2,12 +2,13 @@ class FormFiller {
 
     static apply(data) {
 
-        let key;
+        for (let key in data) {
 
-        for ( key in data ) {
-            if ( document.getElementById(key) ) {
-                document.getElementById(key).setAttribute('value', data[key]);
+            const el = document.getElementById(key);
+            if (el) {
+                el.value = data[key];
             }
+            
         }
 
     }
