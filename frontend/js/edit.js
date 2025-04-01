@@ -72,12 +72,12 @@ document.addEventListener('DOMContentLoaded',
                 
                     const adminControls = document.getElementById('admin_controls');
                     const employeeSelect = document.getElementById('employee_select');
-                    const addEmployeeButton = document.getElementById('add_employee_controls');
+                    const addEmployeeButton = document.getElementById('add_new_btn');
                     
                 
                     // Show the dropdown
                     adminControls.style.display = 'block';
-                    addEmployeeButton.style.display = 'block';
+
                 
                     // Load employee list
                     fetch('/api.php?obj=employee&req=list')
@@ -102,18 +102,11 @@ document.addEventListener('DOMContentLoaded',
                         const statusBox = document.getElementById('form_status');
                         statusBox.style.display = 'none';
 
-                
-                        if (selectedId) {
-                            loadData(selectedId).then(function (employee_data) {
-                                FormFiller.apply(employee_data);
-                                document.getElementById('id').value = selectedId;
-                            });
-                        }
-
                         const formInstructions = document.getElementById('form_instructions');
 
                         if (selectedId) {
                             loadData(selectedId).then(function (employee_data) {
+                                form.reset();
                                 FormFiller.apply(employee_data);
                                 document.getElementById('id').value = selectedId;
 

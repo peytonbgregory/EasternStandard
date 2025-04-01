@@ -7,7 +7,10 @@ class EmployeeModel {
     public function getById($id) {
         
         $db = DB::connect();
-        $result = $db->query('SELECT * FROM employees WHERE id=' . $id);
+        //$result = $db->query('SELECT * FROM employees WHERE id=' . $id);
+        $result = $db->prepare('SELECT * FROM employees WHERE id = :id');
+        $result->execute([':id' => $id]);
+        return $result->fetchObject();
         
         if ( $result ) {
             $row = $result->fetchObject();

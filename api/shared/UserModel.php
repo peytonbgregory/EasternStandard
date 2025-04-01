@@ -9,7 +9,10 @@ class UserModel {
         $db = DB::connect();
 
         // Basic SQL query using string interpolation (can be improved using prepared statements)
-        $result = $db->query('SELECT * FROM employees WHERE username=\'' . $username . '\'');
+        // $result = $db->query('SELECT * FROM employees WHERE username=\'' . $username . '\'');
+        $result = $db->prepare('SELECT * FROM employees WHERE username = :username');
+        $result->execute([':username' => $username]);
+        return $result->fetchObject();
 
         if ($result) {
             // Returns the matching employee as an object
