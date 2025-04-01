@@ -88,7 +88,7 @@ class EmployeeApi {
             }
         }).then(res => res.text()) // <== log raw text first
           .then(text => {
-              console.log("RAW RESPONSE:", text);
+              // console.log("RAW RESPONSE:", text);
               return JSON.parse(text); // attempt to parse after logging
           });
     }

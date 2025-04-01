@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded',
 
                 loadData(employee_id).then(
                     function(employee_data) {
-                        console.log("Employee Data:", employee_data);
+                        // console.log("Employee Data:", employee_data);
                         FormFiller.apply(employee_data);
                         document.getElementById('id').value = employee_id;
                     }
